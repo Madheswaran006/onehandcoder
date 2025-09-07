@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support | OneHand Coder</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #3b82f6, #9333ea);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #1e293b;
+      padding: 1rem;
+      gap: 2rem;
+      border-bottom: 2px solid #3b82f6;
+    }
+
+    nav a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: #3b82f6;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #3b82f6;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #3b82f6;
+      border-left: 4px solid #9333ea;
+      padding-left: 10px;
+    }
+
+    /* FAQ cards */
+    .faq {
+      background: #161b22;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .faq h3 {
+      color: #facc15;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq p {
+      color: #d1d5db;
+    }
+
+    /* Contact Form */
+    form {
+      background: #161b22;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #f97316;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #3b82f6;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: monospace;
+    }
+
+    form button {
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #3b82f6, #9333ea);
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    form button:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <header>🛠 OneHand Coder Support</header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="learn.html">Learn</a>
+    <a href="practice.html">Practice</a>
+    <a href="support.html">Support</a>
+    <a href="settings.html">⚙ Settings</a>
+    <a href="profile.html">Profile</a>
+  </nav>
+
+  <section class="section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <h3>Q1: How do I run my code?</h3>
+      <p>Navigate to the Practice page, select your language, write code, and click the Run button or use Ctrl+Enter.</p>
+    </div>
+    <div class="faq">
+      <h3>Q2: How can I use voice input?</h3>
+      <p>Click the 🎤 Voice Input button or press Ctrl+V while on the Practice page to dictate your code.</p>
+    </div>
+    <div class="faq">
+      <h3>Q3: Where are my saved codes?</h3>
+      <p>Codes are saved locally in your browser via LocalStorage. They will reload automatically on page load.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Contact Support</h2>
+    <form onsubmit="alert('Thank you! Your message has been sent.'); return false;">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Your Email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" rows="5" placeholder="Your message..." required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+</body>
+</html>

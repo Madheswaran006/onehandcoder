@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn | OneHand Coder</title>
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #e2e8f0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+header {
+    background: linear-gradient(90deg, #3b82f6, #9333ea);
+    padding: 1.2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background: #1e293b;
+    padding: 1rem;
+    position: relative;
+    flex-wrap: wrap;
+}
+nav a {
+    text-decoration: none;
+    color: #e2e8f0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+nav a:hover { color: #3b82f6; }
+/* Dropdown */
+.dropdown { position: relative; display: inline-block; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1e293b;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    z-index: 1;
+}
+.dropdown-content a {
+    color: #e2e8f0;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover { background-color: #3b82f6; color: white; }
+.dropdown.show .dropdown-content { display: block; }
+
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #0f172a;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    text-align: left;
+}
+h3 { color:#3b82f6; margin-bottom:0.8rem; }
+.language-section { margin-bottom: 2rem; }
+.language-section h4 { color:#22c55e; cursor:pointer; margin-bottom:0.5rem; }
+.video, .tutorials, .practice { margin: 1rem 0; }
+.video iframe { width: 100%; height: 400px; border-radius: 12px; border: 2px solid #3b82f6; }
+
+.tutorials-links, .practice-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+.tutorials-links a, .practice-links a {
+    flex: 1 1 45%;
+    background: #1e293b;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    color: #3b82f6;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.tutorials-links a:hover, .practice-links a:hover { 
+    background: #3b82f6; 
+    color: white; 
+    transform: scale(1.05);
+}
+
+</style>
+</head>
+<body>
+
+<header>📚 Learn Programming</header>
+<nav>
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <a onclick="toggleDropdown()">Languages ▼</a>
+    <div class="dropdown-content">
+      <a href="#pythonSection">Python</a>
+      <a href="#jsSection">JavaScript</a>
+      <a href="#cppSection">C++</a>
+      <a href="#cSection">C</a>
+      <a href="#htmlSection">HTML</a>
+      <a href="#cssSection">CSS</a>
+      <a href="#javaSection">Java</a>
+    </div>
+  </div>
+  <a href="practice.html">Practice</a>
+  <a href="support.html">Support</a>
+      <a href="settings.html">⚙ Settings</a>
+
+  <a href="profile.html">Profile</a>
+</nav>
+
+<!-- Python Section -->
+<div class="container" id="pythonSection" class="language-section">
+  <h3>🐍 Python</h3>
+  <div class="video">
+    <h4>Full Course Video:</h4>
+    <iframe src="https://www.youtube.com/embed/_uQrJ0TkZlc" title="Python Full Course" allowfullscreen></iframe>
+  </div>
+  <div class="tutorials">
+    <h4>Tutorials:</h4>
+    <div class="tutorials-links">
+        <a href="https://www.w3schools.com/python/" target="_blank">W3Schools Python</a>
+    </div>
+  </div>
+  <div class="practice">
+    <h4>Practice Websites:</h4>
+    <div class="practice-links">
+        <a href="https://www.hackerrank.com/domains/python" target="_blank">HackerRank Python</a>
+        <a href="https://www.codechef.com/practice?end_rating=400&group=unattempted&limit=20&search=&sort_by=difficulty_rating&sort_order=asc&start_rating=0" target="_blank">CodeChef Python</a>
+        <a href="https://leetcode.com/problemset/all/?topicSlugs=python" target="_blank">LeetCode Python</a>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript Section -->
+<div class="container" id="jsSection" class="language-section">
+  <h3>📜 JavaScript</h3>
+  <div class="video">
+    <h4>Full Course Video:</h4>
+    <iframe src="https://www.youtube.com/embed/hdI2bqOjy3c" title="JavaScript Full Course" allowfullscreen></iframe>
+  </div>
+  <div class="tutorials">
+    <h4>Tutorials:</h4>
+    <div class="tutorials-links">
+        <a href="https://www.w3schools.com/js/" target="_blank">W3Schools JS</a>
+    </div>
+  </div>
+  <div class="practice">
+    <h4>Practice Websites:</h4>
+    <div class="practice-links">
+        <a href="https://www.hackerrank.com/domains/tutorials/10-days-of-javascript" target="_blank">HackerRank JS</a>
+        <a href="https://www.codechef.com/tags/problems/javascript" target="_blank">CodeChef JS</a>
+        <a href="https://leetcode.com/problemset/all/?topicSlugs=javascript" target="_blank">LeetCode JS</a>
+    </div>
+  </div>
+</div>
+
+<!-- C++ Section -->
+<div class="container" id="cppSection" class="language-section">
+  <h3>💻 C++</h3>
+  <div class="video">
+    <h4>Full Course Video:</h4>
+    <iframe src="https://www.youtube.com/embed/vLnPwxZdW4Y" title="C++ Full Course" allowfullscreen></iframe>
+  </div>
+  <div class="tutorials">
+    <h4>Tutorials:</h4>
+    <div class="tutorials-links">
+        <a href="https://www.w3schools.com/cpp/" target="_blank">W3Schools C++</a>
+    </div>
+  </div>
+  <div class="practice">
+    <h4>Practice Websites:</h4>
+    <div class="practice-links">
+        <a href="https://www.hackerrank.com/domains/cpp" target="_blank">HackerRank C++</a>
+        <a href="https://www.codechef.com/tags/problems/cpp" target="_blank">CodeChef C++</a>
+        <a href="https://leetcode.com/problemset/all/?topicSlugs=cpp" target="_blank">LeetCode C++</a>
+    </div>
+  </div>
+</div>
+
+<!-- C Language Section -->
+<div class="container" id="cSection" class="language-section">
+  <h3>🔹 C Language</h3>
+  <div class="video">
+    <h4>Full Course Video:</h4>
+    <iframe src="https://www.youtube.com/embed/KJgsSFOSQv0" title="C Language Full Course" allowfullscreen></iframe>
+  </div>
+  <div class="tutorials">
+    <h4>Tutorials:</h4>
+    <div class="tutorials-links">
+        <a href="https://www.w3schools.com/c/" target="_blank">W3Schools C</a>
+    </div>
+  </div>
+  <div class="practice">
+    <h4>Practice Websites:</h4>
+    <div class="practice-links">
+        <a href="https://www.hackerrank.com/domains/c" target="_blank">HackerRank C</a>
+        <a href="https://www.codechef.com/tags/problems/c" target="_blank">CodeChef C</a>
+        <a href="https://leetcode.com/problemset/all/?topicSlugs=c" target="_blank">LeetCode C</a>
+    </div>
+  </div>
+</div>
+
+<!-- HTML Section -->
+<div class="container" id="htmlSection" class="language-section">
+  <h3>🌐 HTML</h3>
+  <div class="video">
+    <h4>Full Course Video:</h4>
+    <iframe src="https://www.youtube.com/embed/pQN-pnXPaVg" title="HTML Full Course" allowfullscreen></iframe>
+  </div>
+  <div class="tutorials">
+    <h4>Tutorials:</h4>
+    <div class="tutorials-links">
+        <a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML</a>
+    </div>
+  </div>
+  <div class="practice">
+    <h4>Practice Websites:</h4>
+    <div class="practice-links">
+        <a href="https://www.hackerrank.com/domains/tutorials/10-days-of-html" target="_blank">HackerRank HTML</a>
+        <a href="https://www.codechef.com/tags/problems/html" target="_blank">CodeChef HTML</a>
+    </div>
+  </div>
+</div>
+
+<!-- CSS Section -->
+<div class="container" id="cssSection" class="language-section">
+  <h3>🎨 CSS</h3>
+  <div class="video">
+    <h4>Full Course Video:</h4>
+    <iframe src="https://www.youtube.com/embed/yfoY53QXEnI" title="CSS Full Course" allowfullscreen></iframe>
+  </div>
+  <div class="tutorials">
+    <h4>Tutorials:</h4>
+    <div class="tutorials-links">
+        <a href="https://www.w3schools.com/css/" target="_blank">W3Schools CSS</a>
+    </div>
+  </div>
+  <div class="practice">
+    <h4>Practice Websites:</h4>
+    <div class="practice-links">
+        <a href="https://www.hackerrank.com/domains/tutorials/10-days-of-css" target="_blank">HackerRank CSS</a>
+        <a href="https://www.codechef.com/tags/problems/css" target="_blank">CodeChef CSS</a>
+    </div>
+  </div>
+</div>
+
+<!-- Java Section -->
+<div class="container" id="javaSection" class="language-section">
+  <h3>☕ Java</h3>
+  <div class="video">
+    <h4>Full Course Video:</h4>
+    <iframe src="https://www.youtube.com/embed/grEKMHGYyns" title="Java Full Course" allowfullscreen></iframe>
+  </div>
+  <div class="tutorials">
+    <h4>Tutorials:</h4>
+    <div class="tutorials-links">
+        <a href="https://www.w3schools.com/java/" target="_blank">W3Schools Java</a>
+    </div>
+  </div>
+  <div class="practice">
+    <h4>Practice Websites:</h4>
+    <div class="practice-links">
+        <a href="https://www.hackerrank.com/domains/java" target="_blank">HackerRank Java</a>
+        <a href="https://www.codechef.com/tags/problems/java" target="_blank">CodeChef Java</a>
+        <a href="https://leetcode.com/problemset/all/?topicSlugs=java" target="_blank">LeetCode Java</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleDropdown() {
+  document.querySelector(".dropdown").classList.toggle("show");
+}
+async function updateProgress() {
+  const token = localStorage.getItem("token");
+  await fetch("/api/progress", {
+    method: "POST",
+    headers: { 
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
+    },
+    body: JSON.stringify({
+      progress: 40,                 // any number 0–100
+      code: "Solved HelloWorld.js"  // history entry
+    })
+  });
+}
+
+</script>
+
+</body>
+</html>

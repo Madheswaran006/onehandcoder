@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice | OneHandCoder</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #0f172a, #1e293b); color: #e2e8f0; margin: 0; padding: 0; }
+    header { background: linear-gradient(90deg, #3b82f6, #9333ea); padding: 1.2rem; font-size: 1.8rem; font-weight: bold; color: white; text-align: center; }
+    nav { display: flex; justify-content: center; gap: 1rem; background: #1e293b; padding: 1rem; border-bottom: 2px solid #3b82f6; }
+    nav a { color: #e2e8f0; text-decoration: none; font-weight: bold; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s; }
+    nav a:hover { background: #3b82f6; color: white; }
+
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1e293b;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+      border-radius: 8px;
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: #e2e8f0;
+      padding: 10px 14px;
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
+    }
+    .dropdown-content a:hover { background-color: #3b82f6; color: white; }
+    .dropdown:hover .dropdown-content { display: block; }
+
+    .container { max-width: 900px; margin: 2rem auto; background: #0f172a; padding: 1.5rem; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+    textarea { width: 100%; height: 200px; background: #1e293b; color: #e2e8f0; border: 2px solid #3b82f6; border-radius: 10px; padding: 1rem; font-family: monospace; font-size: 1rem; resize: none; outline: none; }
+    button { padding: 0.7rem 1.2rem; margin: 0.5rem; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+    button.run { background: #3b82f6; color: white; }
+    button.clear { background: #ef4444; color: white; }
+    button.save { background: #f59e0b; color: white; }
+    button.voice { background: #22c55e; color: white; }
+    button.progress { background: #9333ea; color: white; }
+    button:hover { transform: scale(1.05); opacity: 0.85; }
+    pre { background: #1e293b; color: #22c55e; padding: 1rem; border-radius: 10px; margin-top: 1rem; text-align: left; overflow-x: auto; white-space: pre-wrap; border: 2px solid #3b82f6; }
+    .quiz-card, .card { background: #1e293b; padding: 1rem; margin: 1rem 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.3s, box-shadow 0.3s; }
+    .quiz-card:hover, .card:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(59,130,246,0.6); }
+    .quiz-option { background: #0f172a; padding: 0.5rem; margin: 0.3rem 0; border-radius: 8px; cursor: pointer; border: 1px solid #3b82f6; transition: all 0.2s; }
+    .quiz-option:hover { background: #3b82f6; color: white; }
+    h3 { color: #3b82f6; }
+  </style>
+</head>
+<body>
+<header>💻 Practice Coding</header>
+<nav>
+  <a href="index.html">Home</a>
+  
+  <!-- Languages Dropdown -->
+  <div class="dropdown">
+    <a href="#">Languages ▼</a>
+    <div class="dropdown-content">
+      <a onclick="setLanguage('javascript')">JavaScript</a>
+      <a onclick="setLanguage('python')">Python</a>
+      <a onclick="setLanguage('cpp')">C++</a>
+      <a onclick="setLanguage('c')">C</a>
+      <a onclick="setLanguage('java')">Java</a>
+      <a onclick="setLanguage('csharp')">C#</a>
+      <a onclick="setLanguage('php')">PHP</a>
+      <a onclick="setLanguage('ruby')">Ruby</a>
+      <a onclick="setLanguage('go')">Go</a>
+    </div>
+  </div>
+
+  <!-- Practice Dropdown -->
+  <div class="dropdown">
+    <a href="#">Practice ▼</a>
+    <div class="dropdown-content">
+      <a href="#codeEditor">Code Editor</a>
+      <a href="#quizSection">Quizzes</a>
+      <a href="#challengeSection">Challenges</a>
+    </div>
+  </div>
+
+  <a href="support.html">Support</a>
+  <a href="profile.html">Profile</a>
+      <a href="settings.html">⚙ Settings</a>
+
+  <a href="#" onclick="logout()">Logout</a>
+</nav>
+
+<div class="container" id="codeEditor">
+  <h3>Code Editor</h3>
+  <label for="languageSelect">Choose Language:</label>
+  <select id="languageSelect">
+    <option value="javascript">JavaScript</option>
+    <option value="python">Python</option>
+    <option value="cpp">C++</option>
+    <option value="c">C</option>
+    <option value="java">Java</option>
+    <option value="csharp">C#</option>
+    <option value="php">PHP</option>
+    <option value="ruby">Ruby</option>
+    <option value="go">Go</option>
+  </select>
+  <br><br>
+
+  <label for="programSelect">💾 Load Saved Program:</label>
+  <select id="programSelect" onchange="loadProgram()">
+    <option value="">-- Select Program --</option>
+  </select>
+
+  <textarea id="codeArea" placeholder="// Write your code here..."></textarea>
+  <div>
+    <button class="run" onclick="runCode()">▶ Run</button>
+    <button class="clear" onclick="clearCode()">🗑 Clear</button>
+    <button class="save" onclick="saveProgram()">💾 Save</button>
+    <button class="voice" onclick="startVoice()">🎤 Voice Input</button>
+    <button class="progress" onclick="updateProgress()">📊 Update Progress</button>
+  </div>
+  <h3>Output:</h3>
+  <pre id="output">Your program output will appear here...</pre>
+</div>
+
+<div class="container" id="quizSection">
+  <h3>💡 Quizzes</h3>
+  <div id="quizContent"></div>
+</div>
+
+<div class="container" id="challengeSection">
+  <h3>🎮 Coding Challenges</h3>
+  <div id="gameChallenges"></div>
+</div>
+
+<script>
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+  }
+
+
+
+  // ✅ Change language from navbar
+  function setLanguage(lang) {
+    document.getElementById("languageSelect").value = lang;
+  }
+
+  function runCode() {
+    const code = document.getElementById("codeArea").value;
+    const lang = document.getElementById("languageSelect").value;
+    document.getElementById("output").innerText = `Running ${lang} code:\n\n${code}`;
+  }
+
+  function clearCode() {
+    document.getElementById("codeArea").value = "";
+    document.getElementById("output").innerText = "Your program output will appear here...";
+  }
+
+  async function saveProgram() {
+  if (!token) return alert("⚠ Not logged in");
+  const code = document.getElementById("codeArea").value;
+  const title = "Program " + new Date().toLocaleTimeString();
+
+  const res = await fetch("http://localhost:5000/api/save-program", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
+    },
+    body: JSON.stringify({ title, content: code })
+  });
+  const data = await res.json();
+  alert(data.message);
+  loadSavedPrograms();
+}
+
+
+  async function updateProgress() {
+    const code = document.getElementById("codeArea").value.substring(0,30) + "...";
+    const res = await fetch("http://localhost:5000/api/progress", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({ code, progress: 70 })
+    });
+    const data = await res.json();
+    alert(data.message);
+  }
+
+  // 🔥 Voice Input with Symbols
+  const symbolMap = {
+    "comma": ",", "semicolon": ";", "colon": ":", "dot": ".", "period": ".",
+    "open bracket": "[", "close bracket": "]",
+    "open parenthesis": "(", "close parenthesis": ")",
+    "open brace": "{", "close brace": "}",
+    "plus": "+", "minus": "-", "star": "*", "asterisk": "*",
+    "slash": "/", "backslash": "\\",
+    "underscore": "_", "equal": "=", "double equal": "==", "triple equal": "===",
+    "greater than": ">", "less than": "<",
+    "quote": "'", "double quote": "\"", "backtick": "`",
+    "pipe": "|", "ampersand": "&", "percent": "%", "dollar": "$",
+    "hash": "#", "at": "@", "exclamation": "!", "question": "?"
+  };
+
+  function replaceSymbols(speech) {
+    let words = speech.toLowerCase().split(" ");
+    return words.map(w => symbolMap[w] || w).join(" ");
+  }
+
+  function startVoice() {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.start();
+
+    recognition.onresult = e => {
+      let speech = e.results[0][0].transcript;
+      let converted = replaceSymbols(speech);
+      document.getElementById("codeArea").value += "\n" + converted;
+
+      if (speech.toLowerCase().includes("run code")) {
+        runCode();
+      }
+    };
+
+    recognition.onerror = e => alert("Voice error: " + e.error);
+  }
+
+  // ✅ Load saved programs
+  async function loadSavedPrograms() {
+    const res = await fetch("http://localhost:5000/api/profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({})
+    });
+    const data = await res.json();
+    const programSelect = document.getElementById("programSelect");
+    programSelect.innerHTML = `<option value="">-- Select Program --</option>`;
+    if (data.success && data.savedPrograms.length > 0) {
+      data.savedPrograms.forEach((p, idx) => {
+        programSelect.innerHTML += `<option value="${idx}">${p.title}</option>`;
+      });
+      window.savedPrograms = data.savedPrograms;
+    }
+  }
+
+  function loadProgram() {
+    const idx = document.getElementById("programSelect").value;
+    if (idx !== "" && window.savedPrograms) {
+      document.getElementById("codeArea").value = window.savedPrograms[idx].content;
+    }
+  }
+
+  // ✅ Quizzes
+  const programmingQuizzes = [
+    {question: "What is the output of: console.log(typeof NaN);", options: ["number","NaN","undefined","object"], answer: "number"},
+    {question: "Which data structure uses LIFO order?", options: ["Queue","Stack","Array","Linked List"], answer: "Stack"},
+    {question: "Which keyword is used to define a constant in JavaScript?", options: ["var","let","const","static"], answer: "const"}
+  ];
+
+  function loadProgrammingQuizzes() {
+    const quizDiv = document.getElementById('quizContent');
+    quizDiv.innerHTML = '';
+    programmingQuizzes.forEach((q, idx) => {
+      let html = `<div class="quiz-card"><h4>${idx+1}. ${q.question}</h4>`;
+      q.options.forEach(opt => {
+        html += `<div class="quiz-option" onclick="checkAnswer(this,'${q.answer}')">${opt}</div>`;
+      });
+      html += `</div>`;
+      quizDiv.innerHTML += html;
+    });
+  }
+
+  function checkAnswer(elem, correctAnswer) {
+    if (elem.innerText === correctAnswer) {
+      elem.style.background="#22c55e"; elem.style.color="white";
+      alert("✅ Correct!");
+    } else {
+      elem.style.background="#ef4444"; elem.style.color="white";
+      alert("❌ Wrong!");
+    }
+  }
+
+  // ✅ Challenges
+  function loadChallenges() {
+    const challengesDiv = document.getElementById('gameChallenges');
+    const data = [
+      {title:"Sum of positive numbers", description:"Return sum of positive numbers in array"},
+      {title:"Reverse string", description:"Reverse the given string"},
+      {title:"Find odd integer", description:"Find the integer which appears odd times"}
+    ];
+    challengesDiv.innerHTML = '';
+    data.forEach(ch => {
+      let html = `<div class="card"><h4>${ch.title}</h4><p>${ch.description}</p><button onclick="alert('Start challenge: ${ch.title}')">Start</button></div>`;
+      challengesDiv.innerHTML += html;
+    });
+  }
+
+  window.onload = () => {
+    loadSavedPrograms();
+    loadProgrammingQuizzes();
+    loadChallenges();
+  };
+</script>
+</body>
+</html>

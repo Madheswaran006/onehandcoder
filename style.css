@@ -1,0 +1,125 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+/* ===== Welcome Line ===== */
+.welcome {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(90deg, #3b82f6, #f97316, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #3b82f6;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  background: #161b22;
+  border-bottom: 1px solid #2a2f3a;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Navbar links */
+.navbar a {
+  text-decoration: none;
+  color: #e6edf3;
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 0.6rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+/* Hover effects */
+.navbar a:hover {
+  border-color: #3b82f6;
+  background: linear-gradient(90deg, #3b82f6, #f97316, #10b981);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn - OneHandCoder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header / Navbar -->
+  <header class="navbar">
+    <h2 class="brand">📘 Learn Section</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Section 1 -->
+    <section class="learn-section">
+      <h2>🔹 What You’ll Learn</h2>
+      <p>Start with the fundamentals of programming. This section will cover:</p>
+      <ul>
+        <li>Variables & Data Types</li>
+        <li>Loops & Conditions</li>
+        <li>Functions & Scope</li>
+        <li>Basic Input / Output</li>
+      </ul>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="learn-section">
+      <h2>🌐 Study Websites</h2>
+      <p>Useful websites to study coding:</p>
+      <ul>
+        <li><a href="https://www.w3schools.com/" target="_blank">W3Schools</a></li>
+        <li><a href="https://developer.mozilla.org/" target="_blank">MDN Web Docs</a></li>
+        <li><a href="https://www.geeksforgeeks.org/" target="_blank">GeeksforGeeks</a></li>
+      </ul>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="learn-section">
+      <h2>🎥 Video Tutorials</h2>
+      <p>Learn by watching coding tutorials on YouTube:</p>
+      
+      <!-- Example: HTML video -->
+      <h3>HTML Basics</h3>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/pQN-pnXPaVg" 
+        title="YouTube video player" frameborder="0" allowfullscreen>
+      </iframe>
+
+      <!-- Example: Python video -->
+      <h3>Python Basics</h3>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/kqtD5dpn9C8" 
+        title="Python tutorial" frameborder="0" allowfullscreen>
+      </iframe>
+    </section>
+
+  </main>
+
+</body>
+</html>

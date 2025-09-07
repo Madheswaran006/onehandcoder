@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TEST — Register & Token</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto;display:flex;gap:18px;flex-direction:column;align-items:center;padding:30px;background:#0b1220;color:#e6eef8}
+    .box{background:#071026;padding:18px;border-radius:8px;width:420px;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+    input,button{width:100%;padding:10px;margin-top:8px;border-radius:6px;border:1px solid #23354a;background:#0f2433;color:#fff}
+    pre{white-space:pre-wrap;background:#071826;padding:8px;border-radius:6px;color:#bfe8c9;max-height:200px;overflow:auto}
+    .row{display:flex;gap:8px}
+    .small{font-size:0.9rem;color:#97a6b8}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h3>Quick register + token debug</h3>
+    <div class="small">Backend URL is <code>http://localhost:5000</code></div>
+
+    <label>Username</label>
+    <input id="username" value="testuser123" />
+
+    <label>Email</label>
+    <input id="email" value="test@example.com" />
+
+    <label>Password</label>
+    <input id="password" value="pass1234" />
+
+    <button id="btnRegister">Register (fetch /api/auth/register)</button>
+    <div style="height:8px"></div>
+    <div class="row">
+      <button id="btnShowToken">Show local token</button>
+      <button id="btnProfile">Call /api/profile</button>
+    </div>
+
+    <h4>Response</h4>
+    <pre id="out">—</pre>
+  </div>
+
+  <script>
+    const out = id => document.getElementById(id);
+    function show(v){ out('out').textContent = typeof v==='string' ? v : JSON.stringify(v,null,2); }
+
+    document.getElementById('btnRegister').addEventListener('click', async () => {
+      show('Sending register request...');
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('http://localhost:5000/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, password })
+        });
+        const data = await res.json();
+        show(data);
+
+        // store token if present
+        if (data && data.token) {
+          localStorage.setItem('token', data.token);
+          show({ message: 'Token saved to localStorage', tokenPreview: data.token.slice(0,24) + '...' , fullResponse: data });
+        } else {
+          show({ message: 'No token in response', fullResponse: data });
+        }
+      } catch (err) {
+        show({ error: String(err) });
+        console.error(err);
+      }
+    });
+
+    document.getElementById('btnShowToken').addEventListener('click', () => {
+      const t = localStorage.getItem('token') || '--- no token in localStorage ---';
+      show({ localStorage_token: t });
+    });
+
+    document.getElementById('btnProfile').addEventListener('click', async () => {
+      const token = localStorage.getItem('token') || '';
+      try {
+        const res = await fetch('http://localhost:5000/api/profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify({})
+        });
+        const data = await res.json();
+        show({ profileResponse: data });
+      } catch (err) {
+        show({ error: String(err) });
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

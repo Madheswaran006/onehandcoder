@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | OneHandCoder</title>
+  <style>
+    body { font-family:'Segoe UI',sans-serif; background:linear-gradient(135deg,#0f172a,#1e293b); color:#e2e8f0; margin:0; padding:0; }
+    header { background:linear-gradient(90deg,#3b82f6,#9333ea); padding:1.2rem; font-size:1.8rem; font-weight:bold; color:white; text-align:center; }
+    .navbar { display:flex; gap:1rem; background:#1e293b; padding:1rem; justify-content:center; border-bottom:2px solid #3b82f6; }
+    .navbar a { color:#e2e8f0; text-decoration:none; font-weight:bold; padding:0.5rem 1rem; border-radius:8px; transition:background 0.3s; }
+    .navbar a:hover { background:#3b82f6; color:white; }
+    .container { max-width:800px; margin:2rem auto; background:#0f172a; padding:1.5rem; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.5); }
+    h2 { color:#3b82f6; margin-top:1.5rem; }
+    .progress-container { width:100%; background:#1e293b; border-radius:10px; margin:1rem 0; border:2px solid #3b82f6; }
+    .progress-bar { height:24px; width:0%; background:linear-gradient(90deg,#22c55e,#16a34a); text-align:center; color:white; font-weight:bold; transition:width 0.5s; }
+    ul { list-style:none; padding:0; }
+    ul li { background:#1e293b; margin:6px 0; padding:10px; border-radius:8px; border:1px solid #334155; }
+    pre { white-space:pre-wrap; background:#0b1220; padding:8px; border-radius:8px; border:1px solid #263041; color:#22c55e; overflow-x:auto; }
+  </style>
+</head>
+<body>
+  <header>👤 Your Profile</header>
+
+  <nav class="navbar">
+    <a href="index.html">🏠 Home</a>
+    <a href="learn.html">📘 Learn</a>
+    <a href="practice.html">💻 Practice</a>
+    <a href="support.html">🛠 Support</a>
+    <a href="settings.html">⚙ Settings</a>
+    <a href="profile.html">👤 Profile</a>
+    <a href="javascript:void(0)" onclick="logout()">🚪 Logout</a>
+  </nav>
+
+  <div class="container">
+    <h2>📊 Learning Progress</h2>
+    <div class="progress-container"><div id="progressBar" class="progress-bar">0%</div></div>
+    <p id="progressText">Loading progress...</p>
+
+    <h2>📜 History</h2>
+    <ul id="historyList"><li>Loading...</li></ul>
+
+    <h2>🏆 Completed Courses</h2>
+    <ul id="completedList"><li>Loading...</li></ul>
+
+    <h2>💾 Saved Programs</h2>
+    <ul id="programList"><li>Loading...</li></ul>
+  </div>
+
+  <script>
+
+
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    }
+
+    async function loadProfileData() {
+      try {
+        const res = await fetch("http://localhost:5000/api/profile", {
+  method: "POST",
+  headers: { 
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + token
+  },
+    body: JSON.stringify({})   // ✅ only empty body, no token needed
+  });
+
+
+        const data = await res.json();
+
+        if (!data.success) {
+          document.getElementById("progressText").innerText = "⚠ " + data.message;
+          return;
+        }
+
+        // Progress
+        const bar = document.getElementById("progressBar");
+        bar.style.width = (data.progress || 0) + "%";
+        bar.textContent = (data.progress || 0) + "%";
+        document.getElementById("progressText").innerText = (data.progress || 0) + "% completed";
+
+        // History
+        const historyList = document.getElementById("historyList");
+        historyList.innerHTML = "";
+        if (data.history && data.history.length > 0) {
+          data.history.slice().reverse().forEach(h => {
+            historyList.innerHTML += `<li>🕒 ${h.code} <br><small>${new Date(h.date).toLocaleString()}</small></li>`;
+          });
+        } else {
+          historyList.innerHTML = "<li>No history yet</li>";
+        }
+
+        // Completed Courses
+        const completedList = document.getElementById("completedList");
+        completedList.innerHTML = "";
+        if (data.completedCourses && data.completedCourses.length > 0) {
+          data.completedCourses.forEach(c => {
+            completedList.innerHTML += `<li>✅ ${c}</li>`;
+          });
+        } else {
+          completedList.innerHTML = "<li>No completed courses yet</li>";
+        }
+
+        // Saved Programs
+        const programList = document.getElementById("programList");
+        programList.innerHTML = "";
+        if (data.savedPrograms && data.savedPrograms.length > 0) {
+          data.savedPrograms.slice().reverse().forEach(p => {
+            programList.innerHTML += `<li><b>${p.title}</b> <small>(${new Date(p.date).toLocaleString()})</small><pre>${p.content}</pre></li>`;
+          });
+        } else {
+          programList.innerHTML = "<li>No saved programs yet</li>";
+        }
+      } catch (err) {
+        document.getElementById("progressText").innerText = "⚠ Server not reachable";
+        console.error("Profile fetch error:", err);
+      }
+    }
+
+    // Load on page start + auto-refresh every 10s
+    loadProfileData();
+    setInterval(loadProfileData, 10000);
+  </script>
+</body>
+</html>
